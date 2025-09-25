@@ -1,0 +1,188 @@
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(135deg, #d9ffdc, #f3faf3);
+  overflow-x: hidden;
+  transition: background 0.5s ease-in-out;
+}
+
+/* Header styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  height: 45px;
+  filter: drop-shadow(0 0 5px #4caf50);
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #2e7d32;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+
+.nav-links a:hover {
+  color: #1b5e20;
+  border-bottom: #1b5e20 solid 2px;
+  transform: scale(1.05);
+  transition: 0.1s ease-in-out;
+}
+
+.theme-toggle {
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background-color: rgb(205, 245, 243);
+  color: #2e7d32;
+  font-weight: bold;
+  border: none;
+}
+
+.language-select {
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background-color: rgb(205, 245, 243);
+  color: #2e7d32;
+  font-weight: bold;
+  border: none;
+}
+
+.role-card:hover {
+  transform: none;
+}
+
+.nav-links a {
+  transition: color 0.3s ease-in-out,
+    text-shadow 0.3s ease-in-out;
+}
+
+button,
+select {
+  transition: background-color 0.3s ease-in-out,
+    color 0.3s ease-in-out,
+    border-color 0.3s ease-in-out,
+    transform 0.2s ease-in-out !important;
+}
+
+button:hover,
+select:hover {
+  transform: scale(1.02);
+}
+
+#weather-widget {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #333;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(6px);
+  padding: 4px 12px;
+  border-radius: 10px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Dark theme */
+[data-theme="dark"] #weather-widget {
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
+
+#weather-icon {
+  font-size: 1.3rem;
+  transition: transform 0.3s ease;
+}
+
+#weather-condition {
+  text-transform: capitalize;
+}
+
+#temperature {
+  font-weight: 600;
+}
+
+/*header styles end*/
+
+.container {
+  text-align: center;
+  padding: 25px 20px;
+  animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  font-size: 2.8rem;
+  filter: drop-shadow(0 0 2px #4caf50);
+  color: #2e7d32;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 1.2rem;
+  color: #4e4e4e;
+  margin-bottom: 40px;
+}
+
+.role-selection {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.role-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 30px;
+  width: 220px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.role-card:hover {
+  transform: scale(1.05);
+}
+
+.role-card h2 {
+  color: #2e7d32;
+  filter: drop-shadow(0 0 2px #4caf50);
+  margin-bottom: 10px;
+}
+

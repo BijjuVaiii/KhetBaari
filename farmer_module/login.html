@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../khetbaari image.png" />
+  <title>KheetBaari | Login</title>
+  <!-- Add Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #c7ec98, #69b347);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: linear-gradient(135deg, #d9ffdc, #f3faf3);
+      padding: 2.2rem;  /* Adjusted from 2rem */
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      width: 320px;   /* Increased from 300px */
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+      transform-origin: center center;
+      transform: scale(0.8);  /* Changed from 0.7 to 0.8 */
+    }
+
+    /* keep scale(0.8) inside the animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.8); }  /* Changed scale */
+      to   { opacity: 1; transform: translateY(0) scale(0.8); }     /* Changed scale */
+    }
+
+    h2 {
+      margin-bottom: 2.8rem;  /* Adjusted from 2.5rem */
+      font-size: 1.7rem;     /* Adjusted from 1.6rem */
+      color: #333;
+      filter: drop-shadow(0 0 5px #4caf50);
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem;      /* Adjusted from 0.7rem */
+      margin: 0.55rem 0;     /* Adjusted from 0.5rem */
+      border: 1px solid #ddd;
+      border-radius: 0.7rem;
+      font-size: 1rem;       /* Adjusted from 0.95rem */
+      outline: none;
+      transition: 0.3s;
+      box-sizing: border-box;
+    }
+
+    input:focus {
+      border-color: #56ab2f;
+      box-shadow: 0 0 5px rgba(86, 171, 47, 0.4);
+    }
+
+    .phone-input {
+      padding-left: 4rem;  /* Increased from 3rem for more spacing */
+    }
+
+    .country-code {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+      font-size: 1rem;
+      padding-right: 0.5rem; /* Added padding */
+      border-right: 1px solid #ddd; /* Added separator line */
+    }
+
+    button {
+      width: 100%;
+      padding: 0.85rem;     /* Adjusted from 0.8rem */
+      margin-top: 1rem;
+      border: none;
+      border-radius: 0.7rem;
+      font-size: 1rem;      /* Adjusted from 0.95rem */
+      font-weight: bold;
+      background: #56ab2f;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #3d7a22;
+    }
+
+    button:disabled {
+      background: #88c76b;
+      cursor: not-allowed;
+    }
+
+    .switch, .forgot {
+      margin-top: 0.9rem;   /* Adjusted from 0.8rem */
+      font-size: 0.9rem;    /* Adjusted from 0.85rem */
+    }
+
+    .switch a, .forgot a, .auth-toggle {
+      color: #56ab2f;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .auth-toggle {
+      margin: 1rem 0;
+      display: block;
+    }
+
+    .message {
+      margin-top: 1rem;
+      color: #444;
+      font-size: 0.9rem;
+      min-height: 20px;
+    }
+
+    .error {
+      color: #d32f2f;
+    }
+
+    .success {
+      color: #388e3c;
+    }
+
+    .verification-code {
+      letter-spacing: 0.5rem;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    #recaptcha-container {
+      margin: 1rem 0;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Update input, button, and other text elements */
+    input, button, select, .message, .switch, .forgot, .auth-toggle, h2 {
+      font-family: 'Montserrat', sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="../khetbaari image.png" alt="logo" style="width: 140px; filter: drop-shadow(0 0 5px #4caf50);">
+    <h2 id="form-title">Login</h2>
+    
+    <!-- Email/Password Form -->
+    <div id="emailSection">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+    </div>
+
+    <!-- Phone Number Form -->
+    <div id="phoneSection" class="hidden">
+      <div class="input-group">
+        <span class="country-code">+977</span>
+        <input type="tel" id="phone" class="phone-input" placeholder="Phone Number" maxlength="10" pattern="[0-9]*">
+      </div>
+      <input type="text" id="verificationCode" class="verification-code hidden" placeholder="Enter OTP" maxlength="6" pattern="[0-9]*">
+      <div id="recaptcha-container"></div>
+    </div>
+
+    <button id="submitBtn" onclick="handleSubmit()">Login</button>
+
+    <!-- Auth Toggle -->
+    <a class="auth-toggle" onclick="toggleAuthMethod()">
+      <span id="authToggleText">Use Phone Number</span>
+    </a>
+
+    <!-- Forgot password link (only visible in email login mode) -->
+    <div class="forgot" id="forgot-section">
+      <a onclick="handleForgotPassword()">Forgot Password?</a>
+    </div>
+
+    <!-- Switch between login/signup -->
+    <div class="switch">
+      Don't have an account? <a onclick="toggleForm()">Sign up</a>
+    </div>
+
+    <div class="message" id="message"></div>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+
+  <script>
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDzJ2B77J6EA0Scw1zkeQU99VjoYREUxk0",
+      authDomain: "khetbaari.firebaseapp.com",
+      projectId: "khetbaari",
+      storageBucket: "khetbaari.firebasestorage.app",
+      messagingSenderId: "572393807931",
+      appId: "1:572393807931:web:615d7b82efaab85583fc1e",
+      measurementId: "G-TMN8L3RMKG"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // State and UI elements
+    let isLogin = true;
+    let isPhoneAuth = false;
+    let confirmationResult = null;
+    
+    const submitBtn = document.getElementById('submitBtn');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const phoneInput = document.getElementById('phone');
+    const verificationCodeInput = document.getElementById('verificationCode');
+    const messageDiv = document.getElementById('message');
+    const forgotSection = document.getElementById('forgot-section');
+    const formTitle = document.getElementById('form-title');
+    const emailSection = document.getElementById('emailSection');
+    const phoneSection = document.getElementById('phoneSection');
+    const authToggleText = document.getElementById('authToggleText');
+
+    // Initialize reCAPTCHA
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+      'size': 'normal',
+      'callback': (response) => {
+        // Enable sign-in button
+        submitBtn.disabled = false;
+      },
+      'expired-callback': () => {
+        // Disable sign-in button
+        submitBtn.disabled = true;
+        showMessage('reCAPTCHA expired. Please verify again.', true);
+      }
+    });
+
+    function showMessage(message, isError = false) {
+      messageDiv.textContent = message;
+      messageDiv.className = 'message ' + (isError ? 'error' : 'success');
+    }
+
+    function setLoading(loading) {
+      submitBtn.disabled = loading;
+      if (isPhoneAuth && !verificationCodeInput.classList.contains('hidden')) {
+        submitBtn.textContent = loading ? 'Verifying...' : 'Verify OTP';
+      } else {
+        submitBtn.textContent = loading ? 'Please wait...' : getButtonText();
+      }
+    }
+
+    function getButtonText() {
+      if (isPhoneAuth) {
+        return verificationCodeInput.classList.contains('hidden') ? 'Send OTP' : 'Verify OTP';
+      }
+      return isLogin ? 'Login' : 'Sign Up';
+    }
+
+    function toggleAuthMethod() {
+      isPhoneAuth = !isPhoneAuth;
+      emailSection.classList.toggle('hidden');
+      phoneSection.classList.toggle('hidden');
+      forgotSection.classList.toggle('hidden');
+      verificationCodeInput.classList.add('hidden');
+      authToggleText.textContent = isPhoneAuth ? 'Use Email' : 'Use Phone Number';
+      submitBtn.textContent = getButtonText();
+      showMessage('');
+      
+      // Reset and show reCAPTCHA only when switching to phone auth
+      if (isPhoneAuth) {
+        document.getElementById('recaptcha-container').style.display = 'block';
+        window.recaptchaVerifier.render().then(widgetId => {
+          window.recaptchaWidgetId = widgetId;
+        });
+      }
+    }
+
+    async function handlePhoneAuth() {
+      const phone = '+977' + phoneInput.value.trim();
+
+      if (verificationCodeInput.classList.contains('hidden')) {
+        // Send OTP
+        try {
+            setLoading(true);
+            confirmationResult = await auth.signInWithPhoneNumber(phone, window.recaptchaVerifier);
+            verificationCodeInput.classList.remove('hidden');
+            submitBtn.textContent = 'Verify OTP';
+            showMessage('OTP sent successfully!');
+            phoneInput.disabled = true;
+            document.getElementById('recaptcha-container').style.display = 'none';
+        } catch (error) {
+            showMessage('Error: ' + error.message, true);
+            window.recaptchaVerifier.render().then(widgetId => {
+                grecaptcha.reset(widgetId);
+            });
+        } finally {
+            setLoading(false);
+        }
+      } else {
+        // Verify OTP
+        try {
+            setLoading(true);
+            const code = verificationCodeInput.value.trim();
+            await confirmationResult.confirm(code);
+            showMessage('Phone number verified successfully!');
+            setTimeout(() => {
+                window.location.href = '../farmers_form/form.html';
+            }, 1000);
+        } catch (error) {
+            setLoading(false);
+            if (error.code === 'auth/invalid-verification-code') {
+                showMessage('Invalid OTP code. Please try again.', true);
+            } else {
+                showMessage('Error: ' + error.message, true);
+            }
+        }
+      }
+    }
+
+    function toggleForm() {
+      if (isPhoneAuth) {
+        showMessage('Phone authentication is only available for login', true);
+        return;
+      }
+      
+      isLogin = !isLogin;
+      formTitle.textContent = isLogin ? 'Login' : 'Sign Up';
+      submitBtn.textContent = isLogin ? 'Login' : 'Sign Up';
+      forgotSection.style.display = isLogin ? 'block' : 'none';
+      const switchText = document.querySelector('.switch');
+      switchText.innerHTML = isLogin ? 
+        'Don\'t have an account? <a onclick="toggleForm()">Sign up</a>' :
+        'Already have an account? <a onclick="toggleForm()">Login</a>';
+      showMessage('');
+    }
+
+    function validatePhoneNumber(phone) {
+      const phoneRegex = /^[0-9]{10}$/;
+      return phoneRegex.test(phone);
+    }
+
+    function validateInputs() {
+      if (isPhoneAuth) {
+        if (verificationCodeInput.classList.contains('hidden')) {
+          // Validating phone number
+          const phone = phoneInput.value.trim();
+          if (!validatePhoneNumber(phone)) {
+            showMessage('Please enter a valid 10-digit phone number', true);
+            return false;
+          }
+        } else {
+          // Validating OTP
+          const code = verificationCodeInput.value.trim();
+          if (code.length !== 6) {
+            showMessage('Please enter the 6-digit verification code', true);
+            return false;
+          }
+        }
+        return true;
+      }
+
+      // Email validation
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+
+      if (!email || !password) {
+        showMessage('Please fill in all fields', true);
+        return false;
+      }
+
+      if (!email.includes('@')) {
+        showMessage('Please enter a valid email address', true);
+        return false;
+      }
+
+      if (password.length < 6) {
+        showMessage('Password must be at least 6 characters long', true);
+        return false;
+      }
+
+      return true;
+    }
+
+    async function handleSubmit() {
+      if (!validateInputs()) return;
+
+      setLoading(true);
+
+      try {
+        if (isPhoneAuth) {
+          await handlePhoneAuth();
+        } else if (isLogin) {
+          // Email Login
+          const userCredential = await auth.signInWithEmailAndPassword(
+            emailInput.value.trim(), 
+            passwordInput.value
+          );
+          
+          if (userCredential.user.emailVerified) {
+            showMessage('Login successful!');
+            setTimeout(() => {
+              window.location.href = '../farmers_form/form.html';
+            }, 1000);
+          } else {
+            showMessage('Please verify your email first. Check your inbox.', true);
+            await userCredential.user.sendEmailVerification();
+            showMessage('A new verification email has been sent!');
+          }
+        } else {
+          // Email Sign up
+          const userCredential = await auth.createUserWithEmailAndPassword(
+            emailInput.value.trim(), 
+            passwordInput.value
+          );
+          
+          await userCredential.user.sendEmailVerification();
+          showMessage('Account created! Please check your email to verify your account.');
+          setTimeout(toggleForm, 2000);
+        }
+      } catch (error) {
+        let errorMessage = 'Error: ';
+        switch (error.code) {
+          case 'auth/user-not-found':
+            errorMessage += 'No account found with this email';
+            break;
+          case 'auth/wrong-password':
+            errorMessage += 'Incorrect password';
+            break;
+          case 'auth/too-many-requests':
+            errorMessage += 'Too many failed attempts. Please try again later';
+            break;
+          case 'auth/email-already-in-use':
+            errorMessage += 'This email is already registered';
+            break;
+          case 'auth/invalid-email':
+            errorMessage += 'Invalid email address';
+            break;
+          case 'auth/weak-password':
+            errorMessage += 'Password should be at least 6 characters';
+            break;
+          default:
+            errorMessage += error.message;
+        }
+        showMessage(errorMessage, true);
+      } finally {
+        if (!isPhoneAuth || verificationCodeInput.classList.contains('hidden')) {
+          setLoading(false);
+        }
+      }
+    }
+
+    async function handleForgotPassword() {
+      const email = emailInput.value.trim();
+      if (!email) {
+        showMessage('Please enter your email address', true);
+        return;
+      }
+
+      setLoading(true);
+      try {
+        await auth.sendPasswordResetEmail(email);
+        showMessage('Password reset email sent! Please check your inbox.');
+      } catch (error) {
+        let errorMessage = 'Error: ';
+        switch (error.code) {
+          case 'auth/user-not-found':
+            errorMessage += 'No account found with this email';
+            break;
+          case 'auth/invalid-email':
+            errorMessage += 'Invalid email address';
+            break;
+          default:
+            errorMessage += error.message;
+        }
+        showMessage(errorMessage, true);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    // Add event listeners for Enter key
+    emailInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        if (isLogin) {
+          passwordInput.focus();
+        } else {
+          handleSubmit();
+        }
+      }
+    });
+
+    passwordInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        handleSubmit();
+      }
+    });
+
+    phoneInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        handleSubmit();
+      }
+    });
+
+    verificationCodeInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        handleSubmit();
+      }
+    });
+
+    // Numeric only input for phone and OTP
+    phoneInput.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/[^0-9]/g, '');
+    });
+
+    verificationCodeInput.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/[^0-9]/g, '');
+    });
+  </script>
+</body>
+</html>

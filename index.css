@@ -1,0 +1,66 @@
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #d9ffdc, #f3faf3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .splash-container {
+      margin-top: -8vh;
+      text-align: center;
+      animation: fadeInScale 1.5s ease-out forwards;
+    }
+
+    .splash-container h3 {
+      margin-top: -10vh;
+      font-size: 1.5em;
+      color: #4CAF50;
+      opacity: 0;
+      filter: drop-shadow(0 0 15px #4caf50);
+      animation: fadeInText 2s ease-out forwards;
+      animation-delay: 1s;
+    }
+
+    .logo {
+      margin-top: -15vh;
+      width: 400px;
+      max-width: 80vw;
+      filter: drop-shadow(0 0 5px #4caf50);
+      animation: floatUp 2s ease-out;
+    }
+
+    @keyframes fadeInScale {
+      0% {
+        transform: scale(0.9);
+        opacity: 0;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInText {
+      to {
+        opacity: 1;
+      }
+    }

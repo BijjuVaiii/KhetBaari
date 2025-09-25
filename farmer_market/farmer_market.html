@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Market Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="../khetbaari image.png">
+    <link rel="stylesheet" href="farmer_market.css">
+    <script src="farmer_market.js" defer></script>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="../farmer_module/f_dashboard.html" class="return-link" title="Return to Marketplace">
+                <span class="return-icon">⬅</span>
+            </a>
+            <img src="../khetbaari image.png" alt="Khetbaari Logo" />
+            <span class="logo-text">Khetbaari Market</span>
+        </div>
+        <div class="nav-links">
+            <div id="weather-widget">
+                <span id="weather-icon">☀️</span>
+                <span id="weather-condition">--</span>
+                <span>·</span>
+                <span id="temperature">--°C</span>
+            </div>
+            <select class="language-select" onchange="changeLanguage(this.value)">
+                <option value="en">English</option>
+                <option value="ne">नेपाली</option>
+                <option value="hi">हिन्दी</option>
+            </select>
+            <button class="theme-toggle" onclick="toggleTheme()">🌗 Theme</button>
+        </div>
+    </header>
+
+    <main class="dashboard">
+        <aside class="sidebar">
+            <nav>
+                <button class="nav-button active" onclick="showSection('products')">Products</button>
+                <button class="nav-button" onclick="showSection('orders')">Orders</button>
+                <button class="nav-button" onclick="showSection('analytics')">Analytics</button>
+            </nav>
+        </aside>
+
+        <section class="main-content">
+            <!-- Products Section -->
+            <div id="products" class="section active">
+                <div class="section-header">
+                    <h2>My Products</h2>
+                    <button onclick="showAddProductForm()" class="action-button">+ Add Product</button>
+                </div>
+                <div id="products-list" class="grid-container">
+                    <!-- Products will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Add/Edit Product Form -->
+            <div id="product-form" class="modal">
+                <div class="modal-content">
+                    <h3 id="form-title">Add New Product</h3>
+                    <form id="add-product-form" onsubmit="handleProductSubmit(event)">
+                        <input type="hidden" id="product-id">
+                        <div class="form-group">
+                            <label for="product-name">Product Name</label>
+                            <input type="text" id="product-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-description">Description</label>
+                            <textarea id="product-description" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-price">Price (₹)</label>
+                            <input type="number" id="product-price" required min="0" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label for="product-quantity">Available Quantity</label>
+                            <input type="number" id="product-quantity" required min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="product-image">Product Image URL</label>
+                            <input type="url" id="product-image" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="action-button">Save Product</button>
+                            <button type="button" onclick="closeProductForm()" class="cancel-button">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Orders Section -->
+            <div id="orders" class="section">
+                <h2>Orders</h2>
+                <div class="orders-filter">
+                    <select id="order-status-filter" onchange="filterOrders()">
+                        <option value="all">All Orders</option>
+                        <option value="pending">Pending</option>
+                        <option value="processing">Processing</option>
+                        <option value="shipped">Shipped</option>
+                        <option value="delivered">Delivered</option>
+                    </select>
+                </div>
+                <div id="orders-list">
+                    <!-- Orders will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Analytics Section -->
+            <div id="analytics" class="section">
+                <h2>Analytics</h2>
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h3>Total Sales</h3>
+                        <p id="total-sales">₹0</p>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>Active Products</h3>
+                        <p id="active-products">0</p>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>Pending Orders</h3>
+                        <p id="pending-orders">0</p>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="sales-chart"></canvas>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

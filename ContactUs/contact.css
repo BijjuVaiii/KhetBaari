@@ -1,0 +1,109 @@
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(135deg, #d9ffdc, #f3faf3);
+  overflow-x: hidden;
+  transition: background 0.5s ease-in-out;
+}
+
+/* Header styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  height: 45px;
+  filter: drop-shadow(0 0 5px #4caf50);
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #2e7d32;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #1b5e20;
+  border-bottom: #1b5e20 solid 2px;
+  transform: scale(1.05);
+  transition: 0.1s ease-in-out;
+}
+
+.theme-toggle {
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background-color: rgb(205, 245, 243);
+  color: #2e7d32;
+  font-weight: bold;
+  border: none;
+}
+
+.language-select {
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background-color: rgb(205, 245, 243);
+  color: #2e7d32;
+  font-weight: bold;
+  border: none;
+}
+
+.role-card:hover {
+  transform: none;
+}
+
+.nav-links a {
+  transition: color 0.3s ease-in-out,
+    text-shadow 0.3s ease-in-out;
+}
+
+button,
+select {
+  transition: background-color 0.3s ease-in-out,
+    color 0.3s ease-in-out,
+    border-color 0.3s ease-in-out,
+    transform 0.2s ease-in-out !important;
+}
+
+button:hover,
+select:hover {
+  transform: scale(1.02);
+}
+
+#weather-widget {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  font-size: 1rem;
+  color: #333;
+}
+
+[data-theme="dark"] #weather-widget {
+  color: #fff;
+}
+
+#temperature {
+  margin-left: 5px;
+}

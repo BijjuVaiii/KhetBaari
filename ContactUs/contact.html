@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khetbaari Dashboard</title>
+  <link rel="icon" type="image/png" href="../khetbaari image.png" />
+  <link rel="stylesheet" href="contact.css" />
+  <script src="contact.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <header class="header">
+    <div class="logo">
+      <img src="../khetbaari image.png" alt="Khetbaari Logo" />
+      <span style="font-size: 1.5rem; font-weight: bold; color: #2e7d32;">Khetbaari</span>
+    </div>
+    <div class="nav-links">
+      <!-- <a href="#about">About</a>
+      <a href="#support">Support</a> -->
+      <div id="weather-widget">
+        <span id="temperature">--°C</span>
+      </div>
+      <a href="../ContactUs/contact.html">Contact Us</a>
+      <select class="language-select" onchange="changeLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="ne">नेपाली</option>
+        <option value="hi">हिन्दी</option>
+      </select>
+      <button class="theme-toggle" onclick="toggleTheme()">🌗 Theme</button>
+    </div>
+  </header>
+
+</body>
+
+</html>

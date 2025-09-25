@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khetbaari Dashboard</title>
+  <link rel="icon" type="image/png" href="../khetbaari image.png" />
+  <link rel="stylesheet" href="main_dashboard.css" />
+  <script src="main_dashboard.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="logo">
+      <img src="../khetbaari image.png" alt="Khetbaari Logo" />
+      <span style="font-size: 1.5rem; font-weight: bold; color: #2e7d32;">Khetbaari</span>
+    </div>
+    <div class="nav-links">
+      <!-- <a href="#about">About</a>
+      <a href="#support">Support</a> -->
+      <div id="weather-widget">
+        <span id="weather-icon">☀️</span>
+        <span id="weather-condition">--</span>
+        <span>·</span>
+        <span id="temperature">--°C</span>
+      </div>
+      <a href="../ContactUs/contact.html">Contact Us</a>
+      <select class="language-select" onchange="changeLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="ne">नेपाली</option>
+        <option value="hi">हिन्दी</option>
+      </select>
+      <button class="theme-toggle" onclick="toggleTheme()">🌗 Theme</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Welcome to Khetbaari 🌾</h1>
+    <p>Empowering farmers. Connecting communities. <br><br> Choose your path below:</p>
+
+    <div class="role-selection">
+      <div class="role-card" onclick="location.href='../farmer_module/login.html'">
+        <h2>Farmer</h2>
+        <p>Manage crops, view orders, get tips & weather updates.</p>
+      </div>
+      <div class="role-card" onclick="location.href='consumer-dashboard.html'">
+        <h2>Consumer</h2>
+        <p>Browse fresh produce, buy directly, track your orders.</p>
+      </div>
+    </div>
+    <!-- <div class="weather-container">
+      <h2>🌤 3-Day Weather Forecast</h2>
+      <div id="result">Fetching your location and weather data...</div>
+    </div>
+  </div> -->
+
+</body>
+
+</html>

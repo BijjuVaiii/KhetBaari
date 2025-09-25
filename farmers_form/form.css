@@ -1,0 +1,282 @@
+/* Apply Montserrat */
+body, input, select, button, label, h2 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+body{
+  background: linear-gradient(135deg, #c7ec98, #69b347);
+}
+
+/* Farmer Form Container */
+.form-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, #d9ffdc, #f3faf3);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  animation: fadeInUp 0.6s ease;
+  backdrop-filter: blur(8px);
+  text-align: center;
+}
+
+/* Ensure all inputs are aligned and padding doesn't affect width */
+.farmer-form input,
+.farmer-form select {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #2e7d32;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.farmer-form input:focus,
+.farmer-form select:focus {
+  border-color: #66bb6a;
+  box-shadow: 0 0 10px rgba(102, 187, 106, 0.5);
+}
+
+/* Heading */
+.form-container h2 {
+  margin-bottom: 50px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2e7d32;
+  text-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* Labels */
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2e7d32;
+}
+
+/* Phone Input */
+.phone-input {
+  display: flex;
+  align-items: center;
+}
+
+.country-code {
+  padding: 12px;
+  background: #2e7d32;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 10px 0 0 10px;
+  border: 1px solid #2e7d32;
+}
+
+.phone-input input {
+  flex: 1;
+  border-radius: 0 10px 10px 0;
+  border-left: none;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: gray;
+  margin-top: 4px;
+  display: block;
+  text-align: left;
+}
+
+input[type="file"] {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #2e7d32;
+  background: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* File Input styles */
+input[type="file"] {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #2e7d32;
+  background: #fff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+input[type="file"]:hover {
+  cursor: pointer;
+  background: #f8f8f8;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  padding: 8px 15px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #2e7d32;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+input[type="file"]::file-selector-button {
+  padding: 8px 15px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #2e7d32;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover,
+input[type="file"]::file-selector-button:hover {
+  background: #388e3c;
+}
+
+.form-group:has(input[type="file"]):hover {
+  cursor: pointer;
+}
+
+.form-group:has(input[type="file"]):hover label,
+.form-group:has(input[type="file"]):hover .hint {
+  cursor: pointer;
+}
+
+/* Location Input (Permanent & Temporary Address) */
+.location-input {
+  display: flex;
+  gap: 10px;
+}
+
+.location-input input {
+  flex: 1;
+}
+
+.loc-btn {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: #2e7d32;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.loc-btn:hover {
+  background: #388e3c;
+}
+
+/* Land Units */
+.land-units {
+  display: flex;
+  gap: 10px;
+}
+
+.land-units input {
+  flex: 1;
+}
+
+/* Submit Button */
+.submit-btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: #2e7d32;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 25px;
+}
+
+.submit-btn:hover {
+  background: #388e3c;
+  transform: translateY(-2px);
+}
+
+/* Checkbox styles */
+input[type="checkbox"] {
+    accent-color: #2e7d32;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    top: -1px;
+    vertical-align: middle;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.checkbox-wrapper label {
+    margin: 0;
+    line-height: normal;
+}
+
+/* Add hover effect for the entire checkbox area */
+.checkbox-wrapper:hover,
+.checkbox-wrapper:hover label,
+.checkbox-wrapper:hover input[type="checkbox"] {
+    cursor: pointer;
+}
+
+/* Keep pointer only for file input */
+input[type="file"] {
+    cursor: pointer;
+}
+
+/* Disabled Input Styles */
+input:disabled,
+input:read-only {
+    background-color: white;
+    opacity: 1;
+    cursor: not-allowed;
+}
+
+input[type="text"]:disabled,
+input[type="text"]:read-only {
+    color: inherit;
+    -webkit-text-fill-color: inherit;
+}
+
+/* Terms and Conditions link */
+abbr[title] {
+    text-decoration: none;
+    cursor: pointer;
+    color: #56ab2f;
+    border-bottom: 1px dashed #56ab2f;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farmer Dashboard</title>
+  <link rel="icon" type="image/png" href="../khetbaari image.png" />
+  <link rel="stylesheet" href="f_dashboard.css" />
+  <script src="f_dashboard.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <!-- <h1>Welcome to farmer dashboard !!</h1> -->
+  <header class="header">
+    <div class="logo">
+      <img src="../khetbaari image.png" alt="Khetbaari Logo" />
+      <span style="font-size: 1.5rem; font-weight: bold; color: #2e7d32;">Khetbaari</span>
+    </div>
+    <div class="nav-links">
+      <!-- <a href="#about">About</a>
+      <a href="#support">Support</a> -->
+      <div id="weather-widget">
+        <span id="weather-icon">☀️</span>
+        <span id="weather-condition">--</span>
+        <span>·</span>
+        <span id="temperature">--°C</span>
+      </div>
+      <a href="../ContactUs/contact.html">Contact Us</a>
+      <select class="language-select" onchange="changeLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="ne">नेपाली</option>
+        <option value="hi">हिन्दी</option>
+      </select>
+      <button class="theme-toggle" onclick="toggleTheme()">🌗 Theme</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="dashboard-cards">
+      <div class="card">
+        <h3>Market - Place</h3>
+        <p>Access the market place for selling agricultural products.</p>
+        <button onclick="location.href='../farmer_market/farmer_market.html'">Click Here</button>
+      </div>
+      <div class="card">
+        <h3>Crop Recommendations</h3>
+        <p>Get personalized crop suggestions based on your soil and weather conditions.</p>
+        <button onclick="location.href='crop_recommendation.html'">Explore</button>
+      </div>
+      <!-- <div class="card">
+          <h3>Market Prices</h3>
+          <p>Stay updated with the latest market prices for various crops in your region.</p>
+          <button onclick="location.href='market_prices.html'">Check Prices</button>
+        </div> -->
+      <div class="card">
+        <h3>Weather Updates</h3>
+        <p>Get real-time weather updates to plan your farming activities effectively.</p>
+        <button onclick="location.href='weather_updates.html'">View Weather</button>
+      </div>
+    </section>
+
+    <!-- Weather Widget -->
+    <!-- <div class="weather-container">
+      <h2>🌤 3-Day Weather Forecast</h2>
+      <div id="result">Fetching your location and weather data...</div>
+    </div> -->
+</body>
+
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Updates</title>
+    <link rel="icon" type="image/x-icon" href="../khetbaari image.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e4d2b, #2e7d32);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* Back Button Styles */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-3px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Weather Styles */
+        .weather-container {
+            min-height: 100vh;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .location-header {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .location-header h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .location-header h3 {
+            font-size: 1.8em;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .forecast-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1400px;
+            margin-top: 30px;
+            padding: 20px;
+        }
+
+        .forecast-day {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: slideUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .forecast-day:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .forecast-day h3 {
+            font-size: 1.5em;
+            color: #fff;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .weather-icon {
+            width: 100px;
+            height: 100px;
+            margin: 10px auto;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .temp {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 15px 0;
+            background: linear-gradient(135deg, #ffeb3b, #ffc107);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .weather-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .weather-detail-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .weather-detail-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .weather-detail-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        #result {
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.8);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Back Button -->
+    <button class="back-btn" onclick="window.history.back()">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+
+    <!-- Weather Widget -->
+    <div class="weather-container">
+        <div id="result" class="loading">
+            <i class="fas fa-sun fa-spin" style="font-size: 3em; margin-bottom: 20px;"></i>
+            <p>Fetching your location and weather data...</p>
+        </div>
+    </div>
+
+    <script>
+        // ================== 3-DAY WEATHER FORECAST ==================
+        async function showWeather(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=5d4b65f9f9a24ea49cd135211252309&q=${lat},${lon}&days=3&aqi=no&alerts=no`;
+
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error("Unable to fetch forecast");
+
+                const data = await response.json();
+                let output = `
+      <div class="location-header">
+        <h2>Weather Forecast</h2>
+        <h3>${data.location.name}, ${data.location.country}</h3>
+      </div>
+      <div class="forecast-container">`;
+
+                data.forecast.forecastday.forEach((day, index) => {
+                    const date = new Date(day.date);
+                    const formattedDate = date.toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+
+                    output += `
+        <div class="forecast-day" style="animation-delay: ${index * 0.2}s">
+          <h3>${formattedDate}</h3>
+          <img src="https:${day.day.condition.icon}" alt="weather icon" class="weather-icon">
+          <div class="temp">${day.day.avgtemp_c}°C</div>
+          <h4 style="text-align: center; margin-bottom: 15px; color: #fff;">${day.day.condition.text}</h4>
+          
+          <div class="weather-details">
+            <div class="weather-detail-item">
+              <i class="fas fa-temperature-high"></i>
+              <span>High: ${day.day.maxtemp_c}°C</span>
+            </div>
+            <div class="weather-detail-item">
+              <i class="fas fa-temperature-low"></i>
+              <span>Low: ${day.day.mintemp_c}°C</span>
+            </div>
+            <div class="weather-detail-item">
+              <i class="fas fa-tint"></i>
+              <span>Humidity: ${day.day.avghumidity}%</span>
+            </div>
+            <div class="weather-detail-item">
+              <i class="fas fa-wind"></i>
+              <span>Wind: ${day.day.maxwind_kph} kph</span>
+            </div>
+            <div class="weather-detail-item">
+              <i class="fas fa-cloud-rain"></i>
+              <span>Rain: ${day.day.daily_chance_of_rain}%</span>
+            </div>
+            <div class="weather-detail-item">
+              <i class="fas fa-sun"></i>
+              <span>UV: ${day.day.uv}</span>
+            </div>
+            <div class="weather-detail-item">
+              <i class="fas fa-sunrise"></i>
+              <span>Sunrise: ${day.astro.sunrise}</span>
+            </div>
+            <div class="weather-detail-item">
+              <i class="fas fa-sunset"></i>
+              <span>Sunset: ${day.astro.sunset}</span>
+            </div>
+          </div>
+        </div>`;
+                });
+
+                output += `</div>`;
+                document.getElementById("result").innerHTML = output;
+            } catch (error) {
+                document.getElementById("result").innerHTML = `<p style="color:red;">${error.message}</p>`;
+            }
+        }
+
+        function showError(error) {
+            let msg = "";
+            switch (error.code) {
+                case error.PERMISSION_DENIED: msg = "User denied the request for Geolocation."; break;
+                case error.POSITION_UNAVAILABLE: msg = "Location information is unavailable."; break;
+                case error.TIMEOUT: msg = "The request to get user location timed out."; break;
+                default: msg = "An unknown error occurred."; break;
+            }
+            document.getElementById("result").innerHTML = `<p style="color:red;">${msg}</p>`;
+        }
+
+        window.addEventListener('load', () => {
+            if (navigator.geolocation) navigator.geolocation.getCurrentPosition(showWeather, showError);
+        });
+
+    </script>
+</body>
+
+</html>
